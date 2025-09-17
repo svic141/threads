@@ -1,0 +1,65 @@
+{% extends 'core/base.html' %}
+
+{% block title %} {{ item.name }}{% endblock %} 
+
+{% block content %}
+    <div class="grid grid-cols-2 grid-rows-1 gap-4">
+        <a href="#">
+            <div>                    
+                <div class="grid grid-cols-2 grid-rows-2 gap-4">
+                    <div class="row-span-2">
+                        <img src = "{{ item.item_image.url }}" class="rounded-t-lx">
+                    </div>
+                    <div >
+                        <img src = "{{ item.item_image2.url }}" class="rounded-t-lx">
+                    </div>
+                    <div class="col-start-2">
+                        <img src = "{{ item.item_image3.url }}" class="rounded-t-lx">
+                    </div>
+                </div>
+            </div>
+
+            <div class = "p-6 bg-gray-50 rounded-b-xl">
+                <h2 class="text-xl">{{ item.name }}</h2>
+                <p class="text-sm text-gray-500">R{{item.price}}</p>
+                {% if item.description %}
+                    <p class="text-sm text-gray-500"><strong>Description:</strong> <br>{{item.description}}</p>
+                {% endif %}
+                <p class="text-sm text-gray-500"><strong>Sold By:</strong> <br>{{item.created_by}}</p>
+                <a class="inline-block mt-4 px-3 py-3 text-lg font-semibold text-white rounded-xl bg-teal-500 hover:bg-teal-600">Contact Seller</a>
+
+                <div class="">
+                    <div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+                        <h2 class="mb-12 text-2xl text-center">You might like:</h2>
+
+                        <div class="grid grid-cols-4 gap-3">
+                            {% for item in related_items %}
+                            <div>
+                                <a href="{% url 'item:detail' item.id %}">
+                                    <div class="grid grid-cols-5 grid-rows-5 gap-4">
+                                        <div class="col-span-3 row-span-5">                        
+                                            <img src = "{{ item.item_image.url }}" class="rounded-t-lx hover:scale-120">
+                                        </div>
+                                        <div class="col-span-2 row-span-3 col-start-4">
+                                            <img src = "{{ item.item_image2.url }}" class="rounded-t-lx">
+                                        </div>
+                                        <div class="col-span-2 row-span-2 col-start-4 row-start-4">
+                                            <img src = "{{ item.item_image3.url }}" class="rounded-t-lx">
+                                        </div>
+                                    </div>
+
+                                    <div class = "p-6 bg-gray-50 rounded-b-xl">
+                                        <h2 class="text-xl">{{ item.name }}</h2>
+                                        <p class="text-sm text-gray-500">R{{item.price}}</p>
+
+                                    </div>
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+{% endblock %}
