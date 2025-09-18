@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 from .forms import NewItemForm, EditItemForm
 
-from .models import Item
+from .models import Item, Category
 
 # Create your views here.
 def detail(request, pk):
@@ -57,7 +58,19 @@ def edit(request, pk):
     return render(request, 'item/edit.html', {'form':form, 'title': 'Edit Item'})
 
 def browse(request):
+    query = request.GET.get('query', '')
+    categories = Category.objects.all()
     items = Item.objects.filter(is_sold=False)
-    paginator = Paginator(items, 4) 
+    selected_categories = request.GET.getlist('category')
 
-    return render(request, 'item/browse.html', {'items':items, "title": "Browse"})
+    if query:
+        items = items.filter(Q(name__icontains=query) | Q(description__icontains=query))
+
+    if selected_categories:
+        items = items.filter(category__id__in=selected_categories)
+
+    return render(request, 'item/browse.html', {
+        'items':items, 
+        "title": "Browse", 
+        "query":query, 
+        "categories":categories})
