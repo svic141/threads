@@ -1,0 +1,88 @@
+{% extends 'core/base.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+    <div class="w-1/2 p-6  my-6 mx-auto bg-gray-200 rounded-xl">
+        <h1 class="mb-6 text-3xl ">Add Item to your closet: </h1>
+
+        <form method='post' action='.' class="mx-auto" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{ form.non_field_errors }}
+            <div class="mb-3">
+                <label class="inline-block mb-2">Item Name</label><br>
+                {{ form.name }}
+            </div>
+
+            <div class="mb-3">
+                <label class="inline-block mb-2">Item Description</label><br>
+                {{ form.description }}
+
+            </div>
+
+            <div class="mb-3">
+                <label class="inline-block mb-2">Category</label><br>
+                {{ form.category }}
+
+            </div>
+
+            <div class="mb-3">
+                <label class="inline-block mb-2">Quantity</label><br>
+                {{ form.quantity }}
+
+            </div>
+
+
+            <div class="mb-3">
+                <label class="inline-block mb-2">Price</label><br>
+                {{ form.price }}
+
+            </div>
+
+
+            <div class="mb-3">
+                <label class="inline-block mb-2">Item Image</label><br>
+                {{ form.item_image }}
+
+            </div>
+            
+            <div class="mb-3">
+                <label class="inline-block mb-2">Item Image 2</label><br>
+                {{ form.item_image2 }}
+
+            </div>
+            
+            <div class="mb-3">
+                <label class="inline-block mb-2">Item Image3</label><br>
+                {{ form.item_image3 }}
+
+            </div>
+
+
+            <div class="mb-3">
+                <label class="inline-block mb-2">Is this Item on Sale?</label><br>
+                {{ form.on_sale }}
+
+            </div>
+
+           
+            <div class="mb-3">
+                <label class="inline-block mb-2">Discounted Amount (%)</label><br>
+                {{ form.discount }}
+            </div>
+
+
+            {% if form.errors or form.non_field_errors %}
+                <div class= 'mb-3 p-6 bg-red-100 rounded-xl'>
+                    {% for field in form %}
+                        {{ field.errors}}
+                    {% endfor %}
+                </div>
+            {%endif%}
+
+            <button class="py-2 px-8 text-lg bg-teal-500 hover:bg-gray-700 text-white rounded-xl">Add Item</button>
+        </form>
+
+    </div>
+{% endblock %}

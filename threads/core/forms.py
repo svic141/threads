@@ -20,3 +20,11 @@ class LoginForm(AuthenticationForm):
 
     email = forms.CharField(widget=forms.EmailInput(attrs= {'placeholder': 'Enter Your Email', 'class': 'w-full py-4 px-6 rounded-xl'}))
     password1 = forms.CharField(widget=forms.PasswordInput(attrs= {'placeholder': 'Enter Your password', 'class': 'w-full py-4 px-6 rounded-xl'}))
+
+
+class EditUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('username', 'email')
+
+     

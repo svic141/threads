@@ -11,14 +11,25 @@
             <div>
                 <a href="{% url 'item:detail' item.id %}">
                     <div class="grid grid-cols-5 grid-rows-5 gap-4">
-                        <div class="col-span-3 row-span-5">                        
-                            <img src = "{{ item.item_image.url }}" class="rounded-t-lx hover:scale-120">
+                        <div class="col-span-3 row-span-5">
+                            {% if item.item_image.url != NULL %}                        
+                                <img src = "{{ item.item_image.url }}" class="rounded-t-lx hover:scale-120">
+                            {% else %}
+                                <div class = "p-6 bg-gray-300 rounded-b-xl"></div>
+                            {%endif%}
                         </div>
                         <div class="col-span-2 row-span-3 col-start-4">
-                            <img src = "{{ item.item_image2.url }}" class="rounded-t-lx">
-                        </div>
+                            {% if item.item_image2.url != NULL %}                        
+                                <img src = "{{ item.item_image2.url }}" class="rounded-t-lx hover:scale-120">
+                            {% else %}
+                                <div class = "p-6 bg-gray-30 rounded-b-xl"></div>
+                            {%endif%}                        </div>
                         <div class="col-span-2 row-span-2 col-start-4 row-start-4">
-                            <img src = "{{ item.item_image3.url }}" class="rounded-t-lx">
+                            {% if item.item_image3.url != NULL %}                        
+                                <img src = "{{ item.item_image3.url }}" class="rounded-t-lx hover:scale-120">
+                            {% else %}
+                                <div class = "p-6 bg-gray-300 rounded-b-xl"></div>
+                            {%endif%}                        
                         </div>
                     </div>
 
